@@ -1,3 +1,5 @@
+# IAM policy for s3
+
 {
     "Version": "2012-10-17",
     "Statement": [
