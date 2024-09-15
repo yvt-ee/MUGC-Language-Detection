@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MUGC Online Tool</title>
+    <style>
+        body {
+            background-color: #F9F9F9;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+        .logo img {
+            max-width: 200px; 
+            height: auto;
+        }
+        .logo1 img {
+            max-width: 80px; 
+            height: auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+        .title {
+            color: #a52626;
+            font-size: 42px;
+            margin: 30px 0;
+        }
+        .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: end; /* Aligns children elements to the bottom */
+            gap: 10px; /* Adds a gap between the textarea and the button */
+            margin: 30px 0;
+        }
+        textarea {
+            width: 750px;/* Subtract the button width and gap from 100% */
+            height: 400px;
+/*            margin-top: 10px;*/
+            padding: 10px;
+            resize: vertical;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .submit-button {
+            height: 40px; /* Match textarea height */
+            padding: 10px 20px;
+            margin-bottom: 1px; /* To visually align with the bottom of textarea */
+            /* Other styles remain unchanged */
+        }
+        .clear-button {
+            background-color: #bdbcae;
+            height: 40px; /* Match textarea height */
+            padding: 10px 20px;
+            margin-bottom: 1px; /* To visually align with the bottom of textarea */
+            /* Other styles remain unchanged */
+        }
+        .feedback-button {
+            height: 30px; /* Match textarea height */
+            font-size: 12px;
+            padding: 5px 20px;
+            margin-bottom: 1px; /* To visually align with the bottom of textarea */
+            /* Other styles remain unchanged */
+        }
+        .result-container {
+            margin: 20px 0;
+        }
+        .footer {
+            color: #999;
+            font-size: 12px;
+            margin: 30px 0;
+        }
+        .footer1 {
+            color: #999;
+            align-items: left;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+
+        .explanation {
+/*            background-color: #fff3cd;*/
+/*            border-left: 6px solid #ffeeba;*/
+            padding: 15px;
+/*            margin: 10px 0;*/
+            font-size: 16px;
+            line-height: 1.6;
+            border-radius: 5px;
+/*            box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <!-- Updated to fetch from the AWS S3 bucket -->
+            <img src="https://mugcpng.s3.amazonaws.com/northeastern_university.png" alt="Northeastern University">
+        </div>
+        <div class="title-container">
+            <div class="title">MUGC Online Tool</div>
+        </div>
+        <div class="logo1">
+            <!-- Updated to fetch from the AWS S3 bucket -->
+            <img src="https://mugcpng.s3.amazonaws.com/Genai.png" alt="GenAI Research Group">
+        </div>
+    </div>
+    <div class="explanation">
+        <p>Developed by: <a href="https://genairesearch.sites.northeastern.edu" target="_blank">Generative AI Research Group</a></p>
+ 
+        <p>Welcome to Version 2.0 of the MUGC Online Language Detection Tool! </p>
+
+        <p>Enter your text in the box below to see the detection results. </p>
+
+
+       
+    </div>
+    <div class="input-container">
+
+        <textarea id="base" placeholder="Enter your text here"></textarea>
+        
+        <button class="submit-button" onclick="callAPI()">Submit</button>
+
+        <button class="clear-button" onclick="clearText()">Clear</button> 
+    </div>
+    <div class="footer1">
+        <p>Word Count: <span id="wordCount">0</span></p>
+    </div>
+    <div class="result-container">
+        <p>This text is written by: <span id="resultText" style="color: rgb(161, 10, 10);"></span></p>
+        <label>Do you agree?</label>
+        <button class="feedback-button" onclick="submitFeedback('yes')">Yes</button>
+        <button class="feedback-button" onclick="submitFeedback('no')">No</button>
+        <p>We would love your feedback :)</p>
+        
+        <p id="feedbackResult" style="color: rgb(154, 161, 26);"></p> <!-- Style as needed -->
+    </div>
+    <div class="footer">
+        ©copyright: GenAI Research Group, Northeastern University, Seattle
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+    // Adding an input event listener to the textarea
+            document.getElementById('base').addEventListener('input', function() {
+        // Clear the prediction result text
+                document.getElementById('resultText').textContent = '';
+        // Clear the feedback result message
+                document.getElementById('feedbackResult').textContent = '';
+                updateWordCount();
+            });
+        });
+
+        function updateWordCount() {
+            const textAreaValue = document.getElementById('base').value.trim();
+    // Split the text on spaces and filter out empty strings to count words
+            const wordCount = textAreaValue.length > 0 ? textAreaValue.split(/\s+/).filter(Boolean).length : 0;
+            document.getElementById('wordCount').textContent = wordCount;
+        }
+
+        function callAPI() {
+            var base = document.getElementById('base').value;
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({"base": base});
+
+
+            // Display loading text
+            document.getElementById('resultText').textContent = 'Loading...';
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            fetch("https://dek8asfrbj.execute-api.us-east-1.amazonaws.com/dev/", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    document.getElementById('resultText').textContent = result.body; // Update with actual key from your API result
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('resultText').textContent = 'Error fetching result.';
+                });
+        }
+        function clearText() {
+            document.getElementById('base').value = ''; // Clears the textarea
+            document.getElementById('resultText').textContent = '';
+            document.getElementById('feedbackResult').textContent = '';
+        }
+        
+        function submitFeedback(response) {
+            var feedback = response
+            
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({"feedback": feedback,
+                "text": document.getElementById('base').value});
+
+
+            
+            // Display submitting message
+            document.getElementById('feedbackResult').textContent = 'Submitting...';
+
+
+            
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            
+            fetch("https://bh8q6fkfvk.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Feedback submitted successfully:', result);
+                    // Display success message to the user
+                     document.getElementById('feedbackResult').textContent = 'Feedback submitted successfully. Thank you!';
+                })
+                .catch(error => {
+                    console.error('Error submitting feedback:', error);
+                    // Display error message to the user
+                    document.getElementById('feedbackResult').textContent = 'Error submitting feedback. Please try again.';
+                });
+
+        }
+    </script>
+</body>
+</html>
