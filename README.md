@@ -13,6 +13,7 @@ Our ultimate goal is to turn AI into a tool that assists rather than one that sp
 - Language: Python, HTML
 - Containers package up: Docker
 - Web Develop: AWS
+- Data Analysis: Excel
 
 # Architecture
 
@@ -21,6 +22,7 @@ There are three main step to develop the tool as shown below:
 - Model Training
 - Application Building
 - AWS Deploy
+- Test Result & Feedback Data Analysis
 
 
 ![WeChatf4b443f12c1c709346bbedcba750ea15](https://github.com/user-attachments/assets/a10cfa35-d7a3-4808-94d3-920c445ec2a9)
