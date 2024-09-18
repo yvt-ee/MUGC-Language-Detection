@@ -29,6 +29,6 @@ def predict_pipeline(text):
 
 
 if __name__ == '__main__':
-    text = 'Ciao, come stai?'
+    text = 'This is a test message.'
     detect = predict_pipeline(text)
     print('Prediction :', detect)
