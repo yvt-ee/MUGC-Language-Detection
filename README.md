@@ -21,7 +21,7 @@ There are three main step to develop the tool as shown below:
 
 - ML Model Training
 - Deploy ML Models on AWS ECS using Docker and FastAPI
-- AWS website Deploy
+- Application Building on AWS 
 - Test Result & Feedback Data Analysis
 
 
