@@ -37,11 +37,18 @@ docker push <your_docker_hub_username>/language-detection-app
 step5: Deploying Docker Hub image on AWS ECS
 
 Creating the ECS Cluster
-![1*uHHAzxqTHAbIfsDlMLvy2A](https://github.com/user-attachments/assets/9721ba4f-1882-41f4-a55d-58026fad9f9c)
-![1*x85pK7nPVgatEokqDhck0w](https://github.com/user-attachments/assets/f8e1f924-fca9-4f0a-adec-1a775eb3a109)
+
 ![1*d5P2NPGrpAGJNGu1RfLH6g](https://github.com/user-attachments/assets/b0b7383b-2faf-45ae-b49e-0a5c272e31f2)
 
+In “Image URI” give your docker image path and container port should be 80.
 
 ![1*DiWpE8dQVFVhYULHfcLb3A](https://github.com/user-attachments/assets/918de2f8-8375-48a1-8400-8ecff7bf31d6)
 
+Now, create a new task definition
+
+![1*x85pK7nPVgatEokqDhck0w](https://github.com/user-attachments/assets/f8e1f924-fca9-4f0a-adec-1a775eb3a109)
+
+run the above task definition as a new task in the cluster
+
+![1*uHHAzxqTHAbIfsDlMLvy2A](https://github.com/user-attachments/assets/9721ba4f-1882-41f4-a55d-58026fad9f9c)
 
