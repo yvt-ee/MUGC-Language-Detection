@@ -19,9 +19,9 @@ Our ultimate goal is to turn AI into a tool that assists rather than one that sp
 
 There are three main step to develop the tool as shown below:
 
-- Model Training
-- Application Building
-- AWS Deploy
+- ML Model Training
+- Deploy ML Models on AWS ECS using Docker and FastAPI
+- AWS website Deploy
 - Test Result & Feedback Data Analysis
 
 
