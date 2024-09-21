@@ -8,6 +8,8 @@ In this guide, we will focus on app development rather than model training, and 
 
 First, ensure that you have the trained machine learning model saved in a format that can be easily loaded (such as .pkl or .h5). This model will be used for inference in your application.
 
+The model training code is [here](https://github.com/yvt-ee/MUGC-Language-Detection/blob/main/ML%20Model%20Training/Model%20Building%20(local).ipynb) for reference.
+
 ### Step2: Create the Model Inference Script
 To perform model inference, create a Python script that loads the trained model and runs predictions. You can reference an example from [this script.](https://github.com/yvt-ee/MUGC-Language-Detection/blob/main/Deploy%20ML%20Models%20on%20AWS%20ECS%20using%20Docker%20and%20FastAPI/app/model/model_inference.py)
 
