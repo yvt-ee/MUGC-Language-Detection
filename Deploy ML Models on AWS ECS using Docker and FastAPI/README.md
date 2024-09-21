@@ -1,21 +1,29 @@
-On this step, we are going to put the model we trained on Docker hub so we can use it on AWS ECS.
+# Deploying a Trained Machine Learning Model as an Interactive Web Application
 
-step1: Fist, we need to have the trained model
+After training the ML model using Jupyter Notebook or another tool, we build an interactive website to showcase the value of our work. 
 
-step2: Second, we create the [Model Inference script](https://github.com/yvt-ee/MUGC-Language-Detection/blob/main/Deploy%20ML%20Models%20on%20AWS%20ECS%20using%20Docker%20and%20FastAPI/app/model/model_inference.py)
+In this guide, we will focus on app development rather than model training, and will walk you through the process of deploying the trained model as a web application using FastAPI and Docker, and finally hosting it on AWS ECS.
 
-step3: we create the [FastAPI App](https://github.com/yvt-ee/MUGC-Language-Detection/blob/main/Deploy%20ML%20Models%20on%20AWS%20ECS%20using%20Docker%20and%20FastAPI/app/main.py)
+### Step1: Obtain the Trained Model
 
-step4: we [Dockerize](https://github.com/yvt-ee/MUGC-Language-Detection/blob/main/Deploy%20ML%20Models%20on%20AWS%20ECS%20using%20Docker%20and%20FastAPI/Dockerfile) the above FastAPI App
+First, ensure that you have the trained machine learning model saved in a format that can be easily loaded (such as .pkl or .h5). This model will be used for inference in your application.
 
-And we run the docker on your local machine and go to the project’s root dir and then execute the below commands in the terminal
+### Step2: Create the Model Inference Script
+To perform model inference, create a Python script that loads the trained model and runs predictions. You can reference an example from [this script.](https://github.com/yvt-ee/MUGC-Language-Detection/blob/main/Deploy%20ML%20Models%20on%20AWS%20ECS%20using%20Docker%20and%20FastAPI/app/model/model_inference.py)
+
+### Step3: Build the FastAPI Application
+Next, develop a FastAPI application to serve your model. This app will expose an API endpoint for users to send data and receive predictions. You can refer to this example[FastAPI App.](https://github.com/yvt-ee/MUGC-Language-Detection/blob/main/Deploy%20ML%20Models%20on%20AWS%20ECS%20using%20Docker%20and%20FastAPI/app/main.py)
+
+### Step 4: Dockerize the FastAPI Application
+Once your FastAPI app is ready, you'll need to containerize it using Docker. This allows the app to run consistently in any environment. Here's the following [Dockerize example](https://github.com/yvt-ee/MUGC-Language-Detection/blob/main/Deploy%20ML%20Models%20on%20AWS%20ECS%20using%20Docker%20and%20FastAPI/Dockerfile) 
+
+To build the Docker image, navigate to your project’s root directory and run:
 
 ```python
 docker build -t <your_docker_hub_username>/language-detection-app .
 ```
 
-Once the image is built then we can run the container by using below command.
-
+Once the image is built, you can run the container with:
 
 ```python
 docker run -p 80:80 <your_docker_hub_username>/language-detection-app
