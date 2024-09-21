@@ -47,4 +47,4 @@ FastAPI building party take this resortory as reference: [Machine-Learning-Using
 Please feel free to email us at mengyuan.l@northeastern.edu. If you find this work useful in your own research, please consider citing our work.
 
 # License
-This codebase is released under [MIT License](LICENSE).
+This code base is released under [MIT License](LICENSE).
