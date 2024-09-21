@@ -39,7 +39,7 @@ webpage:
 ![WeChatc4cb6afefba04b0991f3475af760e240](https://github.com/user-attachments/assets/4dce0f96-bd03-4d78-8f1d-e1bc41e1357c)
 
 # Acknowledge
-
+FastAPI building party take this resortory as reference: [Machine-Learning-Using-AWS](https://github.com/naman884/Machine-Learning-Using-AWS/blob/main/README.md)
 
 
 # Important Note
