@@ -19,10 +19,9 @@ Our ultimate goal is to turn AI into a tool that assists rather than one that sp
 
 There are three main step to develop the tool as shown below:
 
-- ML Model Training
-- Deploy ML Models on AWS ECS using Docker and FastAPI
-- Application Building on AWS 
-- Test Result & Feedback Data Analysis
+- [ML Model Training](https://github.com/yvt-ee/MUGC-Language-Detection/tree/main/ML%20Model%20Training)
+- [Buid datapipline, push the application to Docker using FastAPI](https://github.com/yvt-ee/MUGC-Language-Detection/tree/main/Deploy%20ML%20Models%20on%20AWS%20ECS%20using%20Docker%20and%20FastAPI)
+- [Application Building on AWS](https://github.com/yvt-ee/MUGC-Language-Detection/tree/main/Application%20Building)
 
 
 ![WeChatf4b443f12c1c709346bbedcba750ea15](https://github.com/user-attachments/assets/a10cfa35-d7a3-4808-94d3-920c445ec2a9)
